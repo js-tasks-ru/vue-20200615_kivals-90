@@ -8,14 +8,16 @@ export const MeetupCover = {
   props: {
     link: {
       type: String,
+      required: false,
     },
     title: {
-      link: String,
+      type: String,
+      required: false,
     },
   },
   computed: {
     imageUrl() {
-      return `--bg-url: url('${this.link}')`;
+      return this.link ? `--bg-url: url('${this.link}')` : '';
     },
   },
 };
