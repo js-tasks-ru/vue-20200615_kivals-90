@@ -6,7 +6,7 @@ import { MeetupInfo } from './MeetupInfo.js';
 
 const template = `
 <div>
-  <meetup-cover :link="getImageUrl()" :title="meetup.title"></meetup-cover>
+  <meetup-cover :link="imageUrl" :title="meetup.title"></meetup-cover>
 
   <div class="container">
     <div class="meetup">
@@ -40,9 +40,9 @@ export const MeetupView = {
       required: true,
     },
   },
-  methods: {
-    getImageUrl() {
-      return getMeetupCoverLink(this.meetup);
+  computed: {
+    imageUrl() {
+      return this.meetup.imageId ? getMeetupCoverLink(this.meetup) : '';
     },
   },
 };
