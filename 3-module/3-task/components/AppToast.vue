@@ -1,12 +1,14 @@
 <template>
   <div class="toasts">
-    <div class="toast toast_success">
-      <app-icon icon="check-circle" />
-      <span>Success</span>
-    </div>
-    <div class="toast toast_error">
-      <app-icon icon="alert-circle" />
-      <span>Error</span>
+    <div
+      v-for="message in filteredMessages"
+      class="toast"
+      :class="message.type === 'success' ? 'toast_success' : 'toast_error'"
+    >
+      <app-icon
+        :icon="message.type === 'success' ? 'check-circle' : 'alert-circle'"
+      />
+      <span>{{ message.text }}</span>
     </div>
   </div>
 </template>
@@ -21,10 +23,43 @@ export default {
 
   components: { AppIcon },
 
-  methods: {
-    error(message) {},
+  data() {
+    return {
+      messages: [],
+    };
+  },
 
-    success(message) {},
+  computed: {
+    filteredMessages() {
+      return this.messages.filter((message) => !message.hide);
+    },
+  },
+
+  methods: {
+    error(message) {
+      let messageObj = this.makeMessageObject(message, 'error');
+      messageObj.setTimer(DELAY);
+      this.messages.push(messageObj);
+    },
+
+    success(message) {
+      let messageObj = this.makeMessageObject(message, 'success');
+      messageObj.setTimer(DELAY);
+      this.messages.push(messageObj);
+    },
+
+    makeMessageObject(message, type) {
+      return {
+        text: message,
+        setTimer(delay) {
+          setTimeout(() => {
+            this.hide = true;
+          }, delay);
+        },
+        type,
+        hide: false,
+      };
+    },
   },
 };
 </script>
