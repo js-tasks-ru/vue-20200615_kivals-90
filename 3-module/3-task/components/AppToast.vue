@@ -37,21 +37,24 @@ export default {
 
   methods: {
     error(message) {
-      this.messages.push(this.makeMessageObject(message, 'error'));
+      let messageObj = this.makeMessageObject(message, 'error');
+      messageObj.setTimer(DELAY);
+      this.messages.push(messageObj);
     },
 
     success(message) {
-      this.messages.push(this.makeMessageObject(message, 'success'));
+      let messageObj = this.makeMessageObject(message, 'success');
+      messageObj.setTimer(DELAY);
+      this.messages.push(messageObj);
     },
 
     makeMessageObject(message, type) {
       return {
-        _text: message,
-        get text() {
+        text: message,
+        setTimer(delay) {
           setTimeout(() => {
             this.hide = true;
-          }, DELAY);
-          return this._text;
+          }, delay);
         },
         type,
         hide: false,
