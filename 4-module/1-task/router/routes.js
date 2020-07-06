@@ -9,11 +9,13 @@ export const routes = [
     children: [
       {
         path: 'a',
+        props: true,
         component: PageA,
       },
       {
         path: 'b',
         name: 'b',
+        props: true,
         component: PageB,
       },
     ],
