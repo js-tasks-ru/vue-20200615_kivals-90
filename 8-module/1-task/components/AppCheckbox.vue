@@ -1,6 +1,12 @@
 <template>
   <label class="checkbox">
-    <input type="checkbox" />
+    <input
+      v-on="$listeners"
+      v-bind="$attrs"
+      v-model="checkboxModel"
+      :value="value"
+      type="checkbox"
+    />
     <slot />
     <span></span>
   </label>
@@ -9,7 +15,73 @@
 <script>
 export default {
   name: 'AppCheckbox',
+  props: {
+    checked: [Boolean, Array],
+    value: [Boolean, String],
+  },
+  model: {
+    event: 'change',
+    prop: 'checked',
+  },
+  computed: {
+    checkboxModel: {
+      get: function () {
+        return this.checked;
+      },
+      set: function (value) {
+        this.$emit('change', value);
+      },
+    },
+  },
 };
+
+/*
+<template>
+  <label class="checkbox">
+    <input
+      type="checkbox"
+      v-bind="$attrs"
+      v-on="listeners"
+      v-model="model"
+      :value="value"
+      :checked="checked"
+    />
+    <slot />
+    <span></span>
+  </label>
+</template>
+
+<script>
+export default {
+  name: 'AppCheckbox',
+  inheritAttrs: false,
+  model: {
+    event: 'change',
+    prop: 'checked',
+  },
+  props: {
+    value: [Boolean, String],
+    checked: [Boolean, Array],
+  },
+  mounted() {},
+  computed: {
+    listeners() {
+      const listeners = { ...this.$listeners };
+      delete listeners.change;
+      return listeners;
+    },
+    model: {
+      get: function () {
+        return this.checked;
+      },
+      set: function (value) {
+        this.$emit('change', value);
+      },
+    },
+  },
+};
+/* render(h) {
+ */
 </script>
 
 <style scoped>
