@@ -1,10 +1,11 @@
 <template>
   <label class="checkbox">
     <input
-      v-on="$listeners"
+      v-on="listeners"
       v-bind="$attrs"
       v-model="checkboxModel"
       :value="value"
+      :checked="checked"
       type="checkbox"
     />
     <slot />
@@ -24,6 +25,11 @@ export default {
     prop: 'checked',
   },
   computed: {
+    listeners() {
+      const listeners = { ...this.$listeners };
+      delete listeners.change;
+      return listeners;
+    },
     checkboxModel: {
       get: function () {
         return this.checked;
@@ -34,54 +40,6 @@ export default {
     },
   },
 };
-
-/*
-<template>
-  <label class="checkbox">
-    <input
-      type="checkbox"
-      v-bind="$attrs"
-      v-on="listeners"
-      v-model="model"
-      :value="value"
-      :checked="checked"
-    />
-    <slot />
-    <span></span>
-  </label>
-</template>
-
-<script>
-export default {
-  name: 'AppCheckbox',
-  inheritAttrs: false,
-  model: {
-    event: 'change',
-    prop: 'checked',
-  },
-  props: {
-    value: [Boolean, String],
-    checked: [Boolean, Array],
-  },
-  mounted() {},
-  computed: {
-    listeners() {
-      const listeners = { ...this.$listeners };
-      delete listeners.change;
-      return listeners;
-    },
-    model: {
-      get: function () {
-        return this.checked;
-      },
-      set: function (value) {
-        this.$emit('change', value);
-      },
-    },
-  },
-};
-/* render(h) {
- */
 </script>
 
 <style scoped>
