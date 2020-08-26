@@ -1,14 +1,10 @@
 <template>
-  <form-layout title="Создать митап">
-    <form>Meetup Form</form>
-  </form-layout>
+  <form>Meetup Form</form>
 </template>
 
 <script>
-import FormLayout from '../components/FormLayout';
 export default {
   name: 'FormPage',
-  components: { FormLayout },
 };
 </script>
 

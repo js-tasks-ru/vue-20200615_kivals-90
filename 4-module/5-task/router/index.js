@@ -13,16 +13,19 @@ export const router = new VueRouter({
     {
       path: '/',
       name: 'meetups',
+      meta: { layout: 'base' },
       component: MeetupsPage,
     },
     {
       path: '/login',
       name: 'login',
+      meta: { layout: 'auth', title: 'Вход' },
       component: LoginPage,
     },
     {
       path: '/form',
       name: 'form',
+      meta: { layout: 'form', title: 'Создание митапа' },
       component: FormPage,
     },
   ],
