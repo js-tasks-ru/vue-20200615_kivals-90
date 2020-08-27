@@ -10,9 +10,10 @@
 <script>
 export default {
   name: 'AuthLayout',
-  computed: {
-    title() {
-      return this.$route.meta.title;
+  props: {
+    title: {
+      type: String,
+      required: true,
     },
   },
 };

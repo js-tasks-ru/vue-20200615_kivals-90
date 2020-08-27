@@ -19,9 +19,10 @@ import TheFooter from './TheFooter';
 export default {
   name: 'FormLayout',
   components: { TheHeader, TheFooter },
-  computed: {
-    title() {
-      return this.$route.meta.title;
+  props: {
+    title: {
+      type: String,
+      required: true,
     },
   },
 };

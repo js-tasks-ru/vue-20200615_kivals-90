@@ -5,9 +5,7 @@
       <router-link :to="{ name: 'form' }">Создать митап</router-link> |
       <router-link :to="{ name: 'login' }">Вход</router-link>
     </nav>
-    <component :is="layout">
-      <router-view />
-    </component>
+    <component :is="layout" :title="title"></component>
   </div>
 </template>
 
@@ -22,6 +20,9 @@ export default {
   computed: {
     layout() {
       return `${this.$route.meta.layout || 'base'}-layout`;
+    },
+    title() {
+      return this.$route.meta.title || '';
     },
   },
   created() {
