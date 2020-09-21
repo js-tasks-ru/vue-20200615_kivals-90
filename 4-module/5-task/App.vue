@@ -5,17 +5,26 @@
       <router-link :to="{ name: 'form' }">Создать митап</router-link> |
       <router-link :to="{ name: 'login' }">Вход</router-link>
     </nav>
-    <base-layout id="app">
-      <router-view />
-    </base-layout>
+    <component :is="layout" :title="title"></component>
   </div>
 </template>
 
 <script>
 import BaseLayout from './components/BaseLayout';
+import AuthLayout from './components/AuthLayout';
+import FormLayout from './components/FormLayout';
+
 export default {
   name: 'App',
-  components: { BaseLayout },
+  components: { BaseLayout, AuthLayout, FormLayout },
+  computed: {
+    layout() {
+      return `${this.$route.meta.layout || 'base'}-layout`;
+    },
+    title() {
+      return this.$route.meta.title || '';
+    },
+  },
   created() {
     this.$router.replace('/');
   },
