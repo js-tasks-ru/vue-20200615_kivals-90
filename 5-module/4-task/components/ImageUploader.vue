@@ -13,7 +13,7 @@
         type="file"
         accept="image/*"
         class="form-control-file"
-        ref="fileControl"
+        ref="input"
         :disabled="loading && 'disabled'"
         @change="chooseImage"
       />
@@ -64,6 +64,7 @@ export default {
     clearImage(e) {
       this.imageId && e.preventDefault();
       this.$emit('change', null);
+      this.$refs.input.value = '';
     },
   },
 };
